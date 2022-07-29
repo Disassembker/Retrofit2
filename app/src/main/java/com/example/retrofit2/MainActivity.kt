@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         txtData = findViewById(R.id.txtData)
+
         getUserList()
     }
 
@@ -36,11 +37,31 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launchWhenCreated {
             try {
                 val response = apiInterface.getAllUsers()
+                Toast.makeText(this@MainActivity,"Stage1",Toast.LENGTH_LONG).show()
+
                 if (response.isSuccessful()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "All good",
-                        Toast.LENGTH_LONG).show()
+                    var json = Gson().toJson(response.body())
+
+                    if (response.body()?.data?.size!! <= 0) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "No Data ",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        txtData.setText(json)
+                    }
+
+                    //new
+                    /* if(response?.body()!!.support.text.contains("Harshita")){
+                         Toast.makeText(
+                             this@MainActivity,
+                             "Hello Retrofit",
+                             Toast.LENGTH_LONG
+                         ).show()
+                     }*/
+
+                    // var getNEsteddata=response.body().data.get(0).suport.url
 
                 } else {
                     Toast.makeText(
@@ -53,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                 Log.e("Error",Ex.localizedMessage)
             }
         }
+
     }
 
 }
