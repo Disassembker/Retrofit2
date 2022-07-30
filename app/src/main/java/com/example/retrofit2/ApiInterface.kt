@@ -2,8 +2,9 @@ package com.example.retrofit2
 
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.POST
 
 interface ApiInterface {
-    @GET("/api/users?page=2")
+    @POST("b/request56_api.php?id=7000")
     suspend fun getAllUsers(): Response<ResponseListUsers>
 }

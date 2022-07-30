@@ -37,38 +37,18 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launchWhenCreated {
             try {
                 val response = apiInterface.getAllUsers()
-                Toast.makeText(this@MainActivity,"Stage1",Toast.LENGTH_LONG).show()
-
+                Toast.makeText(this@MainActivity,"St0",Toast.LENGTH_LONG).show()
                 if (response.isSuccessful()) {
                     var json = Gson().toJson(response.body())
-
-                    if (response.body()?.data?.size!! <= 0) {
-                        Toast.makeText(
-                            this@MainActivity,
-                            "No Data ",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    } else {
-                        txtData.setText(json)
-                    }
-
-                    //new
-                    /* if(response?.body()!!.support.text.contains("Harshita")){
-                         Toast.makeText(
-                             this@MainActivity,
-                             "Hello Retrofit",
-                             Toast.LENGTH_LONG
-                         ).show()
-                     }*/
-
-                    // var getNEsteddata=response.body().data.get(0).suport.url
-
+                    Toast.makeText(this@MainActivity,"St1",Toast.LENGTH_LONG).show()
+                    txtData.setText(json)
+                    Toast.makeText(this@MainActivity,"St2",Toast.LENGTH_LONG).show()
+                    //if (response.body()?.data?.size!! <= 0) {
+                    //    Toast.makeText(this@MainActivity,"No Data ",Toast.LENGTH_LONG).show()
+                    //} else {
+                    //}
                 } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        response.errorBody().toString(),
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this@MainActivity,response.errorBody().toString(),Toast.LENGTH_LONG).show()
                 }
             }catch (Ex:Exception){
                 Log.e("Error",Ex.localizedMessage)
